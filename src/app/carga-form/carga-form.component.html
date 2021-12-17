@@ -34,8 +34,8 @@
   </div>
   <div class="row">
     <div class="col d-flex justify-content-center">
-      <button class="mx-3 mt-2 btn btn-primary">Cancelar</button>
-      <button class="mx-3 mt-2 btn btn-primary" (click)="submit()">Cargar</button>
+      <button class="mx-3 mt-2 btn btn-primary" (click)="cancelar()">Cancelar</button>
+      <button class="mx-3 mt-2 btn btn-primary" (click)="submit()" [disabled]="loading">Cargar</button>
     </div>
   </div>
   <div class="row">

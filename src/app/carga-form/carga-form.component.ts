@@ -13,6 +13,7 @@ export class CargaFormComponent implements OnInit {
   Euskadi: boolean = false
   mensaje = '';
   loading = false;
+  requests: any = [];
 
   constructor(private cargaService: CargaService) { }
 
@@ -29,6 +30,13 @@ export class CargaFormComponent implements OnInit {
     }
   }
 
+  cancelar() {
+    this.requests.forEach((request: any) => {
+      request.unsubscribe();
+    });
+    this.loading = false;
+  }
+
   checkTodas() {
     if (this.SeleccionarTodas) {
       this.Catalunya = true;
@@ -42,71 +50,71 @@ export class CargaFormComponent implements OnInit {
   }
 
   submit() {
-    this.mensaje = '---------------------------------------------------------------------------------------\n'
+    this.mensaje = ''
     this.loading = true;
     if (this.SeleccionarTodas) {
-      this.cargaService.cargaEUS().subscribe((msg: any) => {
+      this.requests.push(this.cargaService.cargaEUS().subscribe((msg: any) => {
         this.mensaje += msg.message + '\n'
         this.mensaje += '---------------------------------------------------------------------------------------\n'
-        this.cargaService.cargaCAT().subscribe((msg: any) => {
+        this.requests.push(this.cargaService.cargaCAT().subscribe((msg: any) => {
           this.mensaje += msg.message + '\n'
           this.mensaje += '---------------------------------------------------------------------------------------\n'
-          this.cargaService.cargaCV().subscribe((msg: any) => {
+          this.requests.push(this.cargaService.cargaCV().subscribe((msg: any) => {
             this.mensaje += msg.message + '\n'
             this.mensaje += '---------------------------------------------------------------------------------------\n'
             this.loading = false;
-          });
-        });
-      });
+          }));
+        }));
+      }));
     } else if (this.Euskadi && this.ComunidadValenciana) {
-      this.cargaService.cargaEUS().subscribe((msg: any) => {
+      this.requests.push(this.cargaService.cargaEUS().subscribe((msg: any) => {
         this.mensaje += msg.message + '\n'
         this.mensaje += '---------------------------------------------------------------------------------------\n'
-        this.cargaService.cargaCV().subscribe((msg: any) => {
+        this.requests.push(this.cargaService.cargaCV().subscribe((msg: any) => {
           this.mensaje += msg.message + '\n'
           this.mensaje += '---------------------------------------------------------------------------------------\n'
           this.loading = false;
-        });
-      });
+        }));
+      }));
     } else if (this.Euskadi && this.Catalunya) {
-      this.cargaService.cargaEUS().subscribe((msg: any) => {
+      this.requests.push(this.cargaService.cargaEUS().subscribe((msg: any) => {
         this.mensaje += msg.message + '\n'
         this.mensaje += '---------------------------------------------------------------------------------------\n'
-        this.cargaService.cargaCAT().subscribe((msg: any) => {
+        this.requests.push(this.cargaService.cargaCAT().subscribe((msg: any) => {
           this.mensaje += msg.message + '\n'
           this.mensaje += '---------------------------------------------------------------------------------------\n'
           this.loading = false;
-        });
-      });
+        }));
+      }));
     } else if (this.ComunidadValenciana && this.Catalunya) {
-      this.cargaService.cargaCV().subscribe((msg: any) => {
+      this.requests.push(this.cargaService.cargaCV().subscribe((msg: any) => {
         this.mensaje += msg.message + '\n'
         this.mensaje += '---------------------------------------------------------------------------------------\n'
-        this.cargaService.cargaCAT().subscribe((msg: any) => {
+        this.requests.push(this.cargaService.cargaCAT().subscribe((msg: any) => {
           this.mensaje += msg.message + '\n'
           this.mensaje += '---------------------------------------------------------------------------------------\n'
           this.loading = false;
-        });
-      });
+        }));
+      }));
     }
     else if (this.Euskadi) {
-      this.cargaService.cargaEUS().subscribe((msg: any) => {
+      this.requests.push(this.cargaService.cargaEUS().subscribe((msg: any) => {
         this.mensaje += msg.message + '\n'
         this.mensaje += '---------------------------------------------------------------------------------------\n'
         this.loading = false;
-      });
+      }));
     } else if (this.ComunidadValenciana) {
-      this.cargaService.cargaCV().subscribe((msg: any) => {
+      this.requests.push(this.cargaService.cargaCV().subscribe((msg: any) => {
         this.mensaje += msg.message + '\n'
         this.mensaje += '---------------------------------------------------------------------------------------\n'
         this.loading = false;
-      });
+      }));
     } else if (this.Catalunya) {
-      this.cargaService.cargaCAT().subscribe((msg: any) => {
+      this.requests.push(this.cargaService.cargaCAT().subscribe((msg: any) => {
         this.mensaje += msg.message + '\n'
         this.mensaje += '---------------------------------------------------------------------------------------\n'
         this.loading = false;
-      });
+      }));
     }
   }
 }
