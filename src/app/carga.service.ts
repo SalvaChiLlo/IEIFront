@@ -12,15 +12,15 @@ export class CargaService {
 
   constructor(private http: HttpClient) { }
 
-  cargaEUS(): Observable<BibliotecaEUS[]> {
-    return this.http.get<BibliotecaEUS[]>(environment.baseBackendURL + '/api/populateEUS');
+  cargaEUS(): Observable<any> {
+    return this.http.get<any>(environment.baseBackendURL + '/api/populateEUS');
   }
 
   cargaCV() {
-    return this.http.get<BibliotecaEUS[]>(environment.baseBackendURL + '/api/populateCV');
+    return this.http.get<any>(environment.baseBackendURL + '/api/populateCV');
   }
 
   cargaCAT() {
-    return this.http.get<BibliotecaEUS[]>(environment.baseBackendURL + '/api/populateCAT');
+    return this.http.get<any>(environment.baseBackendURL + '/api/populateCAT');
   }
 }

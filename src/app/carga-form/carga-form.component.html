@@ -11,21 +11,23 @@
 
     <div class="col-6">
       <div>
-        <input class="mx-1" type="checkbox" id="SeleccionarTodas" name="SeleccionarTodas" value="SeleccionarTodas"
-          [(ngModel)]="SeleccionarTodas">
+        <input (change)="checkTodas()" lass="mx-1" type="checkbox" id="SeleccionarTodas" name="SeleccionarTodas"
+          value="SeleccionarTodas" [(ngModel)]="SeleccionarTodas">
         <label for="SeleccionarTodas">Seleccionar Todas</label>
       </div>
       <div>
-        <input class="mx-1" type="checkbox" id="ComunidadValenciana" name="ComunidadValenciana"
+        <input (change)="check()" lass="mx-1" type="checkbox" id="ComunidadValenciana" name="ComunidadValenciana"
           value="ComunidadValenciana" checked [(ngModel)]="ComunidadValenciana">
         <label for="ComunidadValenciana">Comunidad Valenciana</label>
       </div>
       <div>
-        <input class="mx-1" type="checkbox" id="Catalunya" name="Catalunya" value="Catalunya" [(ngModel)]="Catalunya">
+        <input (change)="check()" lass="mx-1" type="checkbox" id="Catalunya" name="Catalunya" value="Catalunya"
+          [(ngModel)]="Catalunya">
         <label for="Catalunya">Catalunya</label>
       </div>
       <div>
-        <input class="mx-1" type="checkbox" id="Euskadi" name="Euskadi" value="Euskadi" [(ngModel)]="Euskadi">
+        <input (change)="check()" lass="mx-1" type="checkbox" id="Euskadi" name="Euskadi" value="Euskadi"
+          [(ngModel)]="Euskadi">
         <label for="Euskadi">Euskadi</label>
       </div>
     </div>
@@ -34,6 +36,16 @@
     <div class="col d-flex justify-content-center">
       <button class="mx-3 mt-2 btn btn-primary">Cancelar</button>
       <button class="mx-3 mt-2 btn btn-primary" (click)="submit()">Cargar</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 mt-3 spinner" *ngIf="loading">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <div class="col-12 mt-3 mensaje">
+      <textarea name="mensaje" [(ngModel)]="mensaje" id="mensaje" disabled></textarea>
     </div>
   </div>
 </div>
