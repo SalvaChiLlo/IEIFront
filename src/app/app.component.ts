@@ -1,3 +1,4 @@
+import { BibliotecaModel, ProvinciumModel } from './../../../IEIBack/src/models/biblioteca.models';
 import { CoreService } from './services/core.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'IEIFront';
+  bibliotecas: BibliotecaModel[] = [];
+  codigosPostales: any = [];
+  localidades: any = [];
+  provincias: ProvinciumModel[] = [];
+  tipos: any = [];
+
 
   constructor(private core: CoreService) {
 
@@ -19,15 +25,24 @@ export class AppComponent implements OnInit {
     })
     this.core.getBibliotecas('', '', 'Valencia', 'Privada').subscribe(response => {
       console.log('getBibliotecas', response);
+      this.bibliotecas = response;
     })
     this.core.getCodPostalesYLocalidades('Valencia').subscribe(response => {
       console.log('getCodPostalesYLocalidades', response);
+      this.codigosPostales = [];
+      this.localidades = [];
+      response.forEach((item: any) => {
+        this.codigosPostales.push(item.codigoPostal)
+        this.localidades.push(item.LocalidadNombreLocalidad)
+      });
     })
     this.core.getProvincias().subscribe(response => {
       console.log('getProvincias', response);
+      this.provincias = response;
     })
     this.core.getTipos().subscribe(response => {
       console.log('getTipos', response);
+      this.tipos = response;
     })
   }
 }
