@@ -13,40 +13,44 @@ import { BibliotecaService } from '../biblioteca.service';
 export class MapaComponent implements OnInit, OnChanges {
   @Input() bibliotecas: BibliotecaModel[] = [];
 
+  map: L.Map | null = null;
+  markerGroup: L.LayerGroup | null = null;
+
   constructor(private bibliotecaService: BibliotecaService) { }
 
   ngOnInit(): void {
-    this.bibliotecaService.getBibliotecas().subscribe((bibliotecas: any) => {
-      this.bibliotecas = bibliotecas
-      console.log(this.bibliotecas)
-      this.loadMap()
-    })
+    this.loadMap()
   }
 
-  ngOnChanges(): void {
-    this.bibliotecaService.getBibliotecas().subscribe((bibliotecas: any) => {
-      this.bibliotecas = bibliotecas
-      console.log(this.bibliotecas)
-      this.loadMap()
-    })
+  ngOnChanges(changes: any): void {
+    this.drawPoints();
   }
 
   loadMap(): void {
-    var map = L.map('map').setView([40.41831, -3.70275], 6);
+    this.map = L.map('map').setView([40.41831, -3.70275], 6);
     L.tileLayer(
       'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       {
         attribution:
           'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
-        minZoom: 5,
+        minZoom: 1,
       }
-    ).addTo(map);
+    ).addTo(this.map);
 
-    this.bibliotecas.forEach((biblio : BibliotecaModel) => {
-      var marker = L.marker([biblio.latitud, biblio.longitud]).addTo(map);
-      marker.bindPopup('<p>' + biblio.nombre + '</p><p>' + biblio.email + '</p><p>' + biblio.telefono + '</p>');
-    });
+    this.markerGroup = L.layerGroup().addTo(this.map)
+    this.drawPoints();
+  }
 
+  drawPoints() {
+    if (this.markerGroup) {
+      this.markerGroup.clearLayers();
+      this.bibliotecas.forEach((biblio: BibliotecaModel) => {
+        if (this.map && this.markerGroup) {
+          var marker = L.marker([biblio.latitud, biblio.longitud]).addTo(this.markerGroup);
+          marker.bindPopup('<p>' + biblio.nombre + '</p><p>' + biblio.email + '</p><p>' + biblio.telefono + '</p>');
+        }
+      });
+    }
   }
 }

@@ -1,0 +1,15 @@
+<div class="card" *ngIf="biblioteca.nombre !== ''">
+  <div class="card-body">
+    <h5 class="card-title"> Dirección: {{biblioteca.direccion}}, {{biblioteca.LocalidadNombreLocalidad}}
+      ({{biblioteca.codigoPostal}}) <span *ngIf="provincia !== ''">, {{provincia}}</span>
+    </h5>
+    <p class="card-text">Biblioteca {{biblioteca.tipo}}.</p>
+    <p class="card-text" [innerHTML]="biblioteca.descripcion"></p>
+    <label for="contacto"><strong>Contacto:</strong></label>
+    <ul class="card-text" name="contacto">
+      <li *ngIf="biblioteca.email">Correo: <a [href]="'mailto:' + biblioteca.email"> {{biblioteca.email}}</a></li>
+      <li *ngIf="biblioteca.telefono">Teléfono: <a [href]="'tel:' + biblioteca.telefono"> {{biblioteca.telefono}}</a>
+      </li>
+    </ul>
+  </div>
+</div>

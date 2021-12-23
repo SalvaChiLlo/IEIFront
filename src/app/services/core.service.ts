@@ -1,4 +1,4 @@
-import { BibliotecaModel, ProvinciumModel } from './../../../../IEIBack/src/models/biblioteca.models';
+import { BibliotecaModel, ProvinciumModel, LocalidadModel } from './../../../../IEIBack/src/models/biblioteca.models';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -21,6 +21,10 @@ export class CoreService {
 
   getCodPostalesYLocalidades(nombreProvincia: string): Observable<any> {
     return this.http.get(environment.baseBackendURL + `/api/bibliotecas/cp?nombreProvincia=${nombreProvincia}`);
+  }
+
+  getLocalidad(nombreLocalidad: string): Observable<LocalidadModel[]> {
+    return this.http.get<LocalidadModel[]>(environment.baseBackendURL + `/api/localidades/${nombreLocalidad}`);
   }
 
   getProvincias(): Observable<ProvinciumModel[]> {

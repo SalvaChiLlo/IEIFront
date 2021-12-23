@@ -21,14 +21,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.core.getBibliotecaById(1).subscribe(response => {
-      console.log('getBibliotecaById', response);
     })
     this.core.getBibliotecas('', '', 'Valencia', 'Privada').subscribe(response => {
-      console.log('getBibliotecas', response);
       this.bibliotecas = response;
     })
     this.core.getCodPostalesYLocalidades('Valencia').subscribe(response => {
-      console.log('getCodPostalesYLocalidades', response);
       this.codigosPostales = [];
       this.localidades = [];
       response.forEach((item: any) => {
@@ -37,11 +34,9 @@ export class AppComponent implements OnInit {
       });
     })
     this.core.getProvincias().subscribe(response => {
-      console.log('getProvincias', response);
       this.provincias = response;
     })
     this.core.getTipos().subscribe(response => {
-      console.log('getTipos', response);
       this.tipos = response;
     })
   }
