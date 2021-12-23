@@ -6,11 +6,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CargaFormComponent } from './carga-form/carga-form.component';
+import { MapaComponent } from './mapa/mapa.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CargaFormComponent
+    CargaFormComponent,
+    MapaComponent
   ],
   imports: [
     BrowserModule,
