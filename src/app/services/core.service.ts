@@ -34,4 +34,8 @@ export class CoreService {
   getTipos(): Observable<any> {
     return this.http.get(environment.baseBackendURL + '/api/bibliotecas/tipos');
   }
+
+  dropAll() {
+    return this.http.delete(environment.baseBackendURL + '/api/drop');
+  }
 }

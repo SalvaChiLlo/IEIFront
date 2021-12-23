@@ -1,3 +1,4 @@
+import { CoreService } from './../services/core.service';
 import { CargaService } from './../carga.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -15,7 +16,7 @@ export class CargaFormComponent implements OnInit {
   loading = false;
   requests: any = [];
 
-  constructor(private cargaService: CargaService) { }
+  constructor(private cargaService: CargaService, private core: CoreService) { }
 
   ngOnInit(): void {
   }
@@ -116,5 +117,11 @@ export class CargaFormComponent implements OnInit {
         this.loading = false;
       }));
     }
+  }
+
+  limpiarBD() {
+    this.core.dropAll().subscribe(_ => {
+      this.mensaje = 'La base de datos ha sido vaciada.'
+    });
   }
 }
