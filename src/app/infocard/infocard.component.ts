@@ -17,6 +17,7 @@ export class InfocardComponent implements OnChanges {
     latitud: 0,
     telefono: '',
     email: '',
+    web: '',
     descripcion: '',
     LocalidadNombreLocalidad: '',
   };

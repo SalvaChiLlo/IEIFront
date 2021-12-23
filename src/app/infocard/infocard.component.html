@@ -7,8 +7,11 @@
     <p class="card-text" [innerHTML]="biblioteca.descripcion"></p>
     <label for="contacto"><strong>Contacto:</strong></label>
     <ul class="card-text" name="contacto">
-      <li *ngIf="biblioteca.email">Correo: <a [href]="'mailto:' + biblioteca.email"> {{biblioteca.email}}</a></li>
-      <li *ngIf="biblioteca.telefono">Teléfono: <a [href]="'tel:' + biblioteca.telefono"> {{biblioteca.telefono}}</a>
+      <li *ngIf="biblioteca.web">Página web: <a target="_blank" [href]="biblioteca.web"> {{biblioteca.web}}</a></li>
+      <li *ngIf="biblioteca.email">Correo: <a target="_blank" [href]="'mailto:' + biblioteca.email">
+          {{biblioteca.email}}</a></li>
+      <li *ngIf="biblioteca.telefono">Teléfono: <a target="_blank" [href]="'tel:' + biblioteca.telefono">
+          {{biblioteca.telefono}}</a>
       </li>
     </ul>
   </div>
