@@ -43,12 +43,30 @@ export class MapaComponent implements OnInit, OnChanges {
   }
 
   drawPoints() {
+    const info = document.getElementById('item_')
+
     if (this.markerGroup) {
       this.markerGroup.clearLayers();
-      this.bibliotecas.forEach((biblio: BibliotecaModel) => {
+      this.bibliotecas.forEach((biblio: BibliotecaModel, index) => {
         if (this.map && this.markerGroup) {
           var marker = L.marker([biblio.latitud, biblio.longitud]).addTo(this.markerGroup);
-          marker.bindPopup('<p>' + biblio.nombre + '</p><p>' + biblio.email + '</p><p>' + biblio.telefono + '</p>');
+          marker.bindPopup(`
+          <p style="margin: 0; margin-left: 5px;">${biblio.nombre}</p>
+          <hr style="margin: 2px;"/>
+          <p style="margin: 0; margin-left: 5px;">Correo: ${biblio.email}</p>
+          <hr style="margin: 2px;"/>
+          <p style="margin: 0; margin-left: 5px;">Telf: ${biblio.telefono}</p>
+          <hr style="margin: 2px;"/>
+          <a id="info_${index}" class="link-primary" style="cursor: pointer; margin-left: 5px;">Más información...</a>
+          `);
+          marker.on('popupopen', () => {
+            const infoEl = document.getElementById('info_'+index);
+            infoEl?.addEventListener('click', () => {
+              const itemEl = document.getElementById('item_'+index);
+              itemEl?.click();
+              (itemEl?.parentElement?.parentElement?.childNodes[1] as HTMLElement).scrollIntoView({ block: 'end',  behavior: 'smooth' });
+            })
+          })
         }
       });
     }
