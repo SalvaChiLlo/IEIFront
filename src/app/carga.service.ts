@@ -12,15 +12,33 @@ export class CargaService {
 
   constructor(private http: HttpClient) { }
 
-  cargaEUS(): Observable<any> {
-    return this.http.get<any>(environment.baseBackendURL + '/api/populateEUS');
+  cargaEUS(file: File | null) {
+    if (file === null) {
+      return;
+    }
+    const formData: FormData = new FormData();
+    formData.append('fileKey', file);
+
+    return this.http.post<any>(environment.baseBackendURL + '/api/populateEUS', formData);
   }
 
-  cargaCV() {
-    return this.http.get<any>(environment.baseBackendURL + '/api/populateCV');
+  cargaCV(file: File | null) {
+    if (file === null) {
+      return;
+    }
+    const formData: FormData = new FormData();
+    formData.append('fileKey', file);
+
+    return this.http.post<any>(environment.baseBackendURL + '/api/populateCV', formData);
   }
 
-  cargaCAT() {
-    return this.http.get<any>(environment.baseBackendURL + '/api/populateCAT');
+  cargaCAT(file: File | null) {
+    if (file === null) {
+      return;
+    }
+    const formData: FormData = new FormData();
+    formData.append('fileKey', file);
+
+    return this.http.post<any>(environment.baseBackendURL + '/api/populateCAT', formData);
   }
 }
