@@ -1,4 +1,4 @@
-import { BibliotecaModel, ProvinciumModel } from './../../../../IEIBack/src/models/biblioteca.models';
+import { BibliotecaModel, ProvinciumModel, LocalidadModel } from './../../../../IEIBack/src/models/biblioteca.models';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -23,11 +23,19 @@ export class CoreService {
     return this.http.get(environment.baseBackendURL + `/api/bibliotecas/cp?nombreProvincia=${nombreProvincia}`);
   }
 
+  getLocalidad(nombreLocalidad: string): Observable<LocalidadModel[]> {
+    return this.http.get<LocalidadModel[]>(environment.baseBackendURL + `/api/localidades/${nombreLocalidad}`);
+  }
+
   getProvincias(): Observable<ProvinciumModel[]> {
     return this.http.get<ProvinciumModel[]>(environment.baseBackendURL + '/api/provincias');
   }
 
   getTipos(): Observable<any> {
     return this.http.get(environment.baseBackendURL + '/api/bibliotecas/tipos');
+  }
+
+  dropAll() {
+    return this.http.delete(environment.baseBackendURL + '/api/drop');
   }
 }

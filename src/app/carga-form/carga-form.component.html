@@ -25,11 +25,11 @@
         <input (change)="onFileSelectedEuskadi($event)" class="mx-1" type="file" accept=".json" id="Euskadi" name="Euskadi" value="Euskadi"
           [(ngModel)]="Euskadi">
       </div>
-    </div>
   </div>
   <div class="row">
     <div class="col d-flex justify-content-center">
-      <button class="mx-3 mt-2 btn btn-primary" (click)="cancelar()">Cancelar</button>
+      <button class="mx-3 mt-2 btn btn-outline-danger" (click)="limpiarBD()">Limpiar BD</button>
+      <button class="mx-3 mt-2 btn btn-outline-primary" (click)="cancelar()">Cancelar</button>
       <button class="mx-3 mt-2 btn btn-primary" (click)="submit()" [disabled]="loading">Cargar</button>
     </div>
   </div>

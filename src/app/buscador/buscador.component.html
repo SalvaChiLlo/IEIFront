@@ -1,0 +1,51 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-6">
+      <label for="localidades" class="mt-2"><b>Localidades</b></label>
+      <select [(ngModel)]="localidad" class="form-select" name="localidades">
+        <option>Seleccionar Localidad</option>
+        <option [value]="localidadNombre" *ngFor="let localidadNombre of localidades">{{localidadNombre}}</option>
+      </select>
+      <label for="codPostales" class="mt-2"><b>Código Postal</b></label>
+      <select [(ngModel)]="codPostal" class="form-select" name="codPostales">
+        <option>Seleccionar Código Postal</option>
+        <option [value]="codPostalCod" *ngFor="let codPostalCod of codPostales">{{codPostalCod}}</option>
+      </select>
+      <label for="provincias" class="mt-2"><b>Provincias</b></label>
+      <select [(ngModel)]="provincia" class="form-select" name="provincias">
+        <option>Seleccionar Provincia</option>
+        <option [value]="provincia.nombreProvincia" *ngFor="let provincia of provincias">{{provincia.nombreProvincia}}
+        </option>
+      </select>
+      <label for="tipos" class="mt-2"><b>Tipos</b></label>
+      <select [(ngModel)]="tipo" class="form-select" name="tipos">
+        <option>Seleccionar Tipo</option>
+        <option [value]="tipo.tipo" *ngFor="let tipo of tipos">{{tipo.tipo}}</option>
+      </select>
+      <button class="my-3 btn btn-outline-primary" (click)="reset()">Limpiar Filtros</button>
+      <button class="mx-3 my-3 btn btn-primary" (click)="buscar()">Buscar</button>
+    </div>
+    <div class="col-6">
+      <app-mapa [bibliotecas]="bibliotecas"></app-mapa>
+    </div>
+    <div class="my-3 col-12 d-flex justify-content-center align-items center flex-column">
+      <h3>Se han encontrado {{bibliotecas.length}} bibliotecas</h3>
+      <hr class="my-3">
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item" *ngFor="let biblioteca of bibliotecas; index as index">
+          <h2 class="accordion-header" id="flush-headingOne">
+            <button [id]="'item_'+index" class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              [attr.data-bs-target]="'#flush-collapseOne' + index" aria-expanded="false"
+              [attr.aria-controls]="'flush-collapseOne' + index">
+              {{index + 1}} - {{biblioteca.nombre}}
+            </button>
+          </h2>
+          <div [id]="'flush-collapseOne' + index" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+            data-bs-parent="#accordionFlushExample">
+            <app-infocard class="my-1" [biblioteca]="biblioteca"></app-infocard>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

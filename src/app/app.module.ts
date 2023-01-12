@@ -7,12 +7,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CargaFormComponent } from './carga-form/carga-form.component';
 import { MapaComponent } from './mapa/mapa.component';
+import { BuscadorComponent } from './buscador/buscador.component';
+import { InfocardComponent } from './infocard/infocard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CargaFormComponent,
-    MapaComponent
+    MapaComponent,
+    BuscadorComponent,
+    InfocardComponent
   ],
   imports: [
     BrowserModule,
