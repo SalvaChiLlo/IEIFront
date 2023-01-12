@@ -11,24 +11,19 @@
 
     <div class="col-6">
       <div>
-        <input (change)="checkTodas()" lass="mx-1" type="checkbox" id="SeleccionarTodas" name="SeleccionarTodas"
-          value="SeleccionarTodas" [(ngModel)]="SeleccionarTodas">
-        <label for="SeleccionarTodas">Seleccionar Todas</label>
-      </div>
-      <div>
-        <input (change)="check()" lass="mx-1" type="checkbox" id="ComunidadValenciana" name="ComunidadValenciana"
+        <label for="ComunidadValenciana">Comunidad Valenciana (csv)</label>
+        <input (change)="onFileSelectedComunidadValenciana($event)" class="mx-1" type="file" accept=".csv" id="ComunidadValenciana" name="ComunidadValenciana"
           value="ComunidadValenciana" checked [(ngModel)]="ComunidadValenciana">
-        <label for="ComunidadValenciana">Comunidad Valenciana</label>
       </div>
       <div>
-        <input (change)="check()" lass="mx-1" type="checkbox" id="Catalunya" name="Catalunya" value="Catalunya"
+        <label for="Catalunya">Catalunya (xml)</label>
+        <input (change)="onFileSelectedCatalunya($event)" class="mx-1" type="file" id="Catalunya" accept=".xml" name="Catalunya" value="Catalunya"
           [(ngModel)]="Catalunya">
-        <label for="Catalunya">Catalunya</label>
       </div>
       <div>
-        <input (change)="check()" lass="mx-1" type="checkbox" id="Euskadi" name="Euskadi" value="Euskadi"
+        <label for="Euskadi">Euskadi (json)</label>
+        <input (change)="onFileSelectedEuskadi($event)" class="mx-1" type="file" accept=".json" id="Euskadi" name="Euskadi" value="Euskadi"
           [(ngModel)]="Euskadi">
-        <label for="Euskadi">Euskadi</label>
       </div>
     </div>
   </div>
