@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseBackendURL: 'http://localhost:9000'
+  baseBackendURL:
+    window['env']['baseBackendURL'] || 'http://localhost:8080'
 };
 
 /*
